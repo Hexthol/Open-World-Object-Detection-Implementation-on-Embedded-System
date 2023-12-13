@@ -1,0 +1,1 @@
+ python apply_net_peiqi.py --dataset-dir SMART_KITCHEN_ROOT --test-dataset voc_custom_val  --config-file Kitchen/faster-rcnn/UnSniffer.yaml --inference-config Inference/standard_nms.yaml --random-seed 0 --image-corruption-level 0 --visualize 0 --pretest False
