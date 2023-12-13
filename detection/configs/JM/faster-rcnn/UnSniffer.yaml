@@ -1,0 +1,32 @@
+_BASE_: "../../Base-RCNN-FPN.yaml"
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNNLogisticGMM"
+  # WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  WEIGHTS: "./data/Kitchen/faster-rcnn/UnSniffer/random_seed_0/model_final.pth"
+
+#  PROPOSAL_GENERATOR:
+#    NAME: "RPNLogistic"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 50
+  ROI_HEADS:
+    NAME: "ROIHeadsLogisticGMMNewLimitFPEnergy"
+    NUM_CLASSES: 13
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_custom_train',)
+  TEST: ('voc_custom_val',)
+SOLVER:
+  IMS_PER_BATCH: 14
+  BASE_LR: 0.002
+  STEPS: (120, 160)
+  MAX_ITER: 1000 # 17.4 epochs
+  WARMUP_ITERS: 10
+  CHECKPOINT_PERIOD: 200
+VOS:
+  STARTING_ITER: 600
+  SAMPLE_NUMBER: 100
+DATALOADER:
+    NUM_WORKERS: 8  # Depends on the available memory
